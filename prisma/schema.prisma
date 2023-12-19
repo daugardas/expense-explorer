@@ -1,0 +1,223 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  description String?
+  type        AccountType
+  currency    Currency
+  balance     Float
+  createdAt   DateTime      @default(now())
+  Transaction Transaction[]
+  Transfers   Transaction[] @relation("Transfer")
+}
+
+enum AccountType {
+  CASH
+  BANK
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
+  AED
+  AFN
+  ALL
+  AMD
+  ANG
+  AOA
+  ARS
+  AUD
+  AWG
+  AZN
+  BAMcategor
+  BBD
+  BDT
+  BGN
+  BIF
+  BMD
+  BND
+  BOB
+  BRL
+  BSD
+  BTN
+  BWP
+  BYN
+  BZD
+  CAD
+  CDF
+  CHF
+  CLP
+  CNY
+  COP
+  CVE
+  CZK
+  DJF
+  DKK
+  DOP
+  DZD
+  EGP
+  ERN
+  ETB
+  FJD
+  FKP
+  GEL
+  GHS
+  GIP
+  GMD
+  GNF
+  GTQ
+  GYD
+  HKD
+  HNL
+  HTG
+  HUF
+  IDR
+  ILS
+  INR
+  IQD
+  IRR
+  ISK
+  JMD
+  JOD
+  JPY
+  KES
+  KGS
+  KHR
+  KMF
+  KPW
+  KRW
+  KWD
+  KYD
+  KZT
+  LAK
+  LBP
+  LKR
+  LRD
+  LSL
+  LYD
+  MAD
+  MDL
+  MGA
+  MKD
+  MMK
+  MNT
+  MOP
+  MRU
+  MUR
+  MVR
+  MWK
+  MXN
+  MYR
+  MZN
+  NAD
+  NGN
+  NIO
+  NOK
+  NPR
+  NZD
+  OMR
+  PAB
+  PEN
+  PGK
+  PHP
+  PKR
+  PLN
+  PYG
+  QAR
+  RON
+  RSD
+  RUB
+  RWF
+  SAR
+  SBD
+  SCR
+  SDG
+  SEK
+  SGD
+  SHP
+  SLE
+  SOS
+  SRD
+  SSP
+  STN
+  SYP
+  SZL
+  THB
+  TJS
+  TMT
+  TND
+  TOP
+  TRY
+  TTD
+  TWD
+  TZS
+  UAH
+  UGX
+  UYU
+  UZS
+  VED
+  VES
+  VND
+  VUV
+  WST
+  XAF
+  XCD
+  XOF
+  XPF
+  YER
+  ZAR
+  ZMW
+}
+
+model Category {
+  id             String        @id @default(uuid())
+  name           String
+  description    String?
+  type           CategoryType
+  createdAt      DateTime      @default(now())
+  timesUsed      Int           @default(0)
+  parentId       String?
+  parentCategory Category?     @relation("ParentCategory", fields: [parentId], references: [id])
+  subCategories  Category[]    @relation("ParentCategory")
+  Transaction    Transaction[]
+
+  @@unique([name, type, parentId])
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+model Transaction {
+  id            String          @id @default(uuid())
+  type          TransactionType
+  note          String?
+  amount        Float
+  createdAt     DateTime        @default(now())
+  date          DateTime
+  fromAccountId String
+  fromAccount   Account         @relation(fields: [fromAccountId], references: [id])
+  toAccountId   String?
+  toAccount     Account?        @relation("Transfer", fields: [toAccountId], references: [id])
+  categoryId    String?
+  category      Category?       @relation(fields: [categoryId], references: [id])
+}
