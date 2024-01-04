@@ -1,0 +1,157 @@
+[
+    {
+        "name": "Food",
+        "description": "",
+        "type": "EXPENSE",
+        "subcategories": [
+            {
+                "name": "Groceries",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Restaurants",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Fast Food",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Coffee Shops",
+                "description": "",
+                "type": "EXPENSE"
+            }
+        ]
+    },
+    {
+        "name": "Transportation",
+        "description": "",
+        "type": "EXPENSE",
+        "subcategories": [
+            {
+                "name": "Gas",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Parking",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Public Transportation",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Taxi",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Car Payment",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Car Insurance",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Car Maintenance",
+                "description": "",
+                "type": "EXPENSE"
+            }
+        ]
+    },
+    {
+        "name": "Housing",
+        "description": "",
+        "type": "EXPENSE",
+        "subcategories": [
+            {
+                "name": "Rent",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Mortgage",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Home Insurance",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Home Maintenance",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Furniture",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Home Improvement",
+                "description": "",
+                "type": "EXPENSE"
+            }
+        ]
+    },
+    {
+        "name": "Utilities",
+        "description": "",
+        "type": "EXPENSE",
+        "subcategories": [
+            {
+                "name": "Electricity",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Water",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Gas",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Internet",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Cell Phone",
+                "description": "",
+                "type": "EXPENSE"
+            },
+            {
+                "name": "Cable",
+                "description": "",
+                "type": "EXPENSE"
+            }
+        ]
+    },
+    {
+        "name": "Salary",
+        "description": "",
+        "type": "INCOME",
+        "subcategories": [
+            {
+                "name": "Bonus",
+                "description": "",
+                "type": "INCOME"
+            }
+        ]
+    }
+]
