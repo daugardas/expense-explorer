@@ -1,5 +1,11 @@
 import prisma from "@/lib/db";
-import { Account, AccountType, Currency } from "@prisma/client";
+import { increaseAccountBalanceByAmount } from "@/lib/utils";
+import {
+    Account,
+    AccountType,
+    Currency,
+    TransactionType,
+} from "@prisma/client";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
@@ -77,15 +83,38 @@ export async function POST(request: NextRequest) {
             initialBalance === "" ? "0" : initialBalance
         );
 
+        // create account with 0 balance first, and then creata a transaction to add the initial balance
         const account = await prisma.account.create({
             data: {
                 name,
                 type,
                 description,
                 currency,
-                balance: balance,
+                balance: 0,
             },
         });
+
+        const transaction = await prisma.transaction.create({
+            data: {
+                fromAccountId: account.id,
+                amount: balance,
+                date: new Date(),
+                type: TransactionType.INCOME,
+                note: "Initial balance for account '" + account.name + "'",
+            },
+        });
+
+        await increaseAccountBalanceByAmount(account.id, balance);
+
+        // const account = await prisma.account.create({
+        //     data: {
+        //         name,
+        //         type,
+        //         description,
+        //         currency,
+        //         balance: balance,
+        //     },
+        // });
 
         revalidatePath("/accounts");
 

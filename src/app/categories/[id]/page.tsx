@@ -5,6 +5,7 @@ import DeleteCategory from "./DeleteCategory";
 import SubCategories from "./SubCategories";
 import { redirect } from "next/navigation";
 import AlertButtonLink from "@/app/components/Links/AlertButtonLink";
+import CategoryCharts from "./CategoryCharts";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params;
@@ -69,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 />
                             </div>
 
-                            <div>charts...</div>
+                            <CategoryCharts category={category} />
                         </main>
                     </div>
                 </div>

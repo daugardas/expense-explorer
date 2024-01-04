@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import DeleteSubCategory from "./DeleteSubCategory";
 import SubCategories from "../../SubCategories";
 import AlertButtonLink from "@/app/components/Links/AlertButtonLink";
+import CategoryCharts from "../../CategoryCharts";
 
 export default async function Page({
     params,
@@ -69,7 +70,7 @@ export default async function Page({
                                 />
                             </div>
 
-                            <div>charts...</div>
+                            <CategoryCharts category={subCategory} />
                         </main>
                     </div>
                 </div>

@@ -195,7 +195,9 @@ export default function TransactionsList({
         const date = new Date(transaction.date).toISOString().split("T")[0];
         newTransactions = {
             ...newTransactions,
-            [date]: [...newTransactions[date], transaction],
+            [date]: Object.entries(newTransactions).find(([d, _]) => date === d)
+                ? [...newTransactions[date], transaction]
+                : [transaction],
         };
 
         // sort transactions by date
@@ -352,23 +354,39 @@ export default function TransactionsList({
                     addTransactionToList={handleAddTransactionToList}
                 />
                 <div className="grid grid-flow-row gap-2 mt-4">
-                    <div className="grid grid-cols-[0.4fr_0.4fr_0.4fr_0.5fr_1fr] px-4">
-                        <div className="font-bold">Type</div>
-                        <div className="font-bold">From</div>
-                        <div className="font-bold">To</div>
-                        <div className="font-bold">Amount</div>
-                        <div className="font-bold">Note</div>
-                    </div>
-                    {Object.keys(filteredTransactionsByDate).map((date) => (
-                        <TransactionByDateWrap
-                            key={date}
-                            date={date}
-                            transactionsByDate={filteredTransactionsByDate}
-                            accounts={accounts}
-                            setEditTransactionId={setEditTransactionId}
-                            currentEditTransactionId={editTransactionId}
-                        />
-                    ))}
+                    {Object.keys(filteredTransactionsByDate).length > 0 ? (
+                        <>
+                            <div className="grid grid-cols-[0.4fr_0.4fr_0.4fr_0.5fr_1fr] px-4">
+                                <div className="font-bold">Type</div>
+                                <div className="font-bold">From</div>
+                                <div className="font-bold">To</div>
+                                <div className="font-bold">Amount</div>
+                                <div className="font-bold">Note</div>
+                            </div>
+                            {Object.keys(filteredTransactionsByDate).map(
+                                (date) => (
+                                    <TransactionByDateWrap
+                                        key={date}
+                                        date={date}
+                                        transactionsByDate={
+                                            filteredTransactionsByDate
+                                        }
+                                        accounts={accounts}
+                                        setEditTransactionId={
+                                            setEditTransactionId
+                                        }
+                                        currentEditTransactionId={
+                                            editTransactionId
+                                        }
+                                    />
+                                )
+                            )}
+                        </>
+                    ) : (
+                        <div className="text-center text-gray-500">
+                            No transactions found
+                        </div>
+                    )}
                 </div>
             </div>
         </>
