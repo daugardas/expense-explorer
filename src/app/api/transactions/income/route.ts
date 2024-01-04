@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
 
     const { accountId, categoryId, date, amount, note } = body;
 
+    console.log(body);
+
     if (!accountId || !categoryId || !date) {
         return NextResponse.json({ message: "Invalid body" }, { status: 400 });
     }

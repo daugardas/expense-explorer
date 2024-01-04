@@ -35,7 +35,7 @@ export default function Nav() {
     const pathname = usePathname();
 
     return (
-        <nav className="min-h-screen p-3 flex flex-col flex-auto bg-raisinBlackDarkest w-72">
+        <nav className="min-h-screen p-3 flex flex-col flex-auto bg-raisinBlackDarkest">
             <h1 className="text-3xl text-white text-center mb-10">
                 Expense explorer
             </h1>
